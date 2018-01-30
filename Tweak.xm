@@ -37,20 +37,22 @@ static BOOL didRemoveNotch;
 
 -(void)layoutSubviews {
 
+    %orig;
+
+    self.foregroundColor = [UIColor whiteColor];
+
     SBControlCenterController* ccController = (SBControlCenterController*)[%c(SBControlCenterController) sharedInstance];
 
     // Avoid adding the notch removing view to the control center
     if (!ccController.visible && !didRemoveNotch) {
         [self removeNotch];
     }
-
-    %orig;
 }
 
 %new
 -(void)removeNotch {
 
-    self.foregroundColor = [UIColor whiteColor];
+    
     [self setBackgroundColor:[UIColor blackColor]];
 
     UIView* notchHidingView = blackView();
