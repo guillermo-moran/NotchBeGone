@@ -1,7 +1,7 @@
-# NotchBeGone
-Remove the notch on the iPhone X (iOS 11)
+# NotchBeGone - Make the Notch Disappear on iOS
 
-#To-Do
+For Jailbroken devices on iOS 11+
 
-- Fix bug when in landscape mode
-- Remove notch in control center
+Uses overlays to "hide" the notch by effectively creating a fake "software bezel" around the notch of the iPhone X. Because of the OLED screen, it's also virtually unnoticable.
+
+Clever, huh? 
