@@ -1,5 +1,4 @@
-export THEOS=/opt/theos
-
+ARCHS = arm64
 
 GO_EASY_ON_ME = 1
 
