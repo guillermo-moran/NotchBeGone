@@ -41,12 +41,15 @@ static BOOL didRemoveNotch;
 
     self.foregroundColor = [UIColor whiteColor];
 
-    SBControlCenterController* ccController = (SBControlCenterController*)[%c(SBControlCenterController) sharedInstance];
+    // SBControlCenterController* ccController = (SBControlCenterController*)[%c(SBControlCenterController) sharedInstance];
 
     // Avoid adding the notch removing view to the control center
     // if (!ccController.visible && !didRemoveNotch) {
-        [self removeNotch];
+    //    [self removeNotch];
     // }
+    if(![[[UIApplication sharedApplication] keyWindow] isKindOfClass:%c(SBControlCenterWindow)]) {
+        [self removeNotch];
+    }
 }
 
 %new
@@ -68,7 +71,7 @@ static BOOL didRemoveNotch;
 //Make the Statusbar slightly smaller
 
 - (void)setFrame:(CGRect)frame {
-    frame.size.height = 32;
+    frame.size.height = 34;
     %orig(frame);
 }
 - (CGRect)bounds {
