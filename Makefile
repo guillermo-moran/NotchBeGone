@@ -1,4 +1,4 @@
-ARCHS = arm64
+ARCHS = arm64 arm64e
 
 GO_EASY_ON_ME = 1
 
