@@ -9,7 +9,7 @@ static UIView* blackView(void) {
     CGRect frame = CGRectMake(-40.5, -10, screenBounds.size.width + 81, screenBounds.size.height+200); //this is the border which will cover the notch
 
     UIView *blackView = [[[UIView alloc] initWithFrame:frame] autorelease];
-    blackView.layer.borderColor = [UIColor blueColor].CGColor;
+    blackView.layer.borderColor = [UIColor blackColor].CGColor;
     blackView.layer.borderWidth = 40.0f;
 
     [blackView setClipsToBounds:YES];
@@ -44,9 +44,9 @@ static BOOL didRemoveNotch;
     SBControlCenterController* ccController = (SBControlCenterController*)[%c(SBControlCenterController) sharedInstance];
 
     // Avoid adding the notch removing view to the control center
-    if (!ccController.visible && !didRemoveNotch) {
+    // if (!ccController.visible && !didRemoveNotch) {
         [self removeNotch];
-    }
+    // }
 }
 
 %new

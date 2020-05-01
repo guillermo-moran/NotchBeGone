@@ -1,7 +1,7 @@
 Package: me.gmoran.notchbegone
 Name: NotchBeGone
 Depends: mobilesubstrate
-Version: 0.0.1
+Version: 0.0.2
 Architecture: iphoneos-arm
 Description: An awesome MobileSubstrate tweak!
 Maintainer: Guillermo Moran
