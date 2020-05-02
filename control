@@ -1,10 +1,9 @@
-Package: me.gmoran.notchbegone
-Name: NotchBeGone
+Package: com.crkatri.eggnotch
+Name: eggNotch
 Depends: mobilesubstrate
 Version: 0.0.2
 Architecture: iphoneos-arm
 Description: Hide the notch on notched iPhones, iOS 11? - 13
-    Created by Guillermo Moran, updated for iOS 13 by Egg aka CRKatri
-Maintainer: Guillermo Moran
-Author: Guillermo Moran
+Maintainer: Egg aka CRKatri
+Author: Egg aka CRKatri
 Section: Tweaks

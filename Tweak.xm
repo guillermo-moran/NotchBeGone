@@ -64,7 +64,7 @@ SBAppStatusBarSettingsAssertion *assertion;
     }
 
 	if (!assertion) {
-		assertion = [[NSClassFromString(@"SBAppStatusBarSettingsAssertion") alloc] initWithStatusBarHidden:NO atLevel:5 reason:@"NotchBeGone"];
+		assertion = [[NSClassFromString(@"SBAppStatusBarSettingsAssertion") alloc] initWithStatusBarHidden:NO atLevel:5 reason:@"eggNotch"];
 		[assertion acquire];
 	}
 }
