@@ -5,8 +5,8 @@ GO_EASY_ON_ME = 1
 include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = eggNotch
-NotchBeGone_FILES = Tweak.xm
-NotchBeGone_FRAMEWORKS = UIKit CoreGraphics
+eggNotch_FILES = Tweak.xm
+eggNotch_FRAMEWORKS = UIKit CoreGraphics
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 
