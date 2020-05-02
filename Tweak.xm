@@ -41,16 +41,7 @@ static UIView* blackView(void) {
     %orig;
 
     self.foregroundColor = [UIColor whiteColor];
-    // if (self.didRemoveNotch == nil) {
-    //     self.didRemoveNotch = NO;
-    // }
 
-    // SBControlCenterController* ccController = (SBControlCenterController*)[%c(SBControlCenterController) sharedInstance];
-
-    // Avoid adding the notch removing view to the control center
-    // if (!ccController.visible && !didRemoveNotch) {
-    //    [self removeNotch];
-    // }
     if(![[[UIApplication sharedApplication] keyWindow] isKindOfClass:%c(SBControlCenterWindow)] && !self.didRemoveNotch) {
         [self removeNotch];
     }
