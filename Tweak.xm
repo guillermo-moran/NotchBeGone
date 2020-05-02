@@ -5,7 +5,7 @@ static UIView* blackView(void) {
 
     CGRect screenBounds = [UIScreen mainScreen].bounds;
 
-    CGRect frame = CGRectMake(-40.5, -10, screenBounds.size.width + 81, screenBounds.size.height+200); //this is the border which will cover the notch
+    CGRect frame = CGRectMake(-40.5, -10, screenBounds.size.width + 81, screenBounds.size.height+2000); //this is the border which will cover the notch
 
     UIView *blackView = [[[UIView alloc] initWithFrame:frame] autorelease];
     blackView.layer.borderColor = [UIColor blackColor].CGColor;
