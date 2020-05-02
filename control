@@ -1,9 +1,10 @@
 Package: me.gmoran.notchbegone
 Name: NotchBeGone
 Depends: mobilesubstrate
-Version: 0.0.1
+Version: 0.0.2
 Architecture: iphoneos-arm
-Description: An awesome MobileSubstrate tweak!
+Description: Hide the notch on notched iPhones, iOS 11? - 13
+    Created by Guillermo Moran, updated for iOS 13 by Egg aka CRKatri
 Maintainer: Guillermo Moran
 Author: Guillermo Moran
 Section: Tweaks
