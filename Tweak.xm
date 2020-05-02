@@ -30,6 +30,20 @@ static UIView* blackView(void) {
 @property(readonly, nonatomic, getter=isVisible) _Bool visible;
 @end
 
+@interface LayoutContext : NSObject
+- (id)layoutState;
+@end
+
+@interface SBAppStatusBarSettingsAssertion : NSObject
+- (void)invalidate;
+- (void)acquire;
+-(id)initWithStatusBarHidden:(BOOL)hidden atLevel:(NSUInteger)level reason:(NSString *)reason;
+@property (nonatomic,readonly) NSUInteger level; 
+@property (nonatomic,copy,readonly) NSString * reason;   
+@end
+
+SBAppStatusBarSettingsAssertion *assertion;
+
 // To Do : Add blackView to the control center
 
 %hook _UIStatusBar
@@ -45,6 +59,11 @@ static UIView* blackView(void) {
     if(![[[UIApplication sharedApplication] keyWindow] isKindOfClass:%c(SBControlCenterWindow)] && !self.didRemoveNotch) {
         [self removeNotch];
     }
+
+	if (!assertion) {
+		assertion = [[NSClassFromString(@"SBAppStatusBarSettingsAssertion") alloc] initWithStatusBarHidden:NO atLevel:5 reason:@"NotchBeGone"];
+		[assertion acquire];
+	}
 }
 
 %new
