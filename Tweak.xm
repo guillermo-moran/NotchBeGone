@@ -1,4 +1,3 @@
-
 static UIView* blackView(void) {
 
     // I stole this idea from @LaughingQuoll
@@ -21,6 +20,8 @@ static UIView* blackView(void) {
 
 @interface _UIStatusBar : UIView
 @property (nonatomic, retain) UIColor *foregroundColor;
+@property BOOL didRemoveNotch;
+-(void)removeNotch;
 @end
 
 @interface SBControlCenterController
@@ -29,17 +30,20 @@ static UIView* blackView(void) {
 @property(readonly, nonatomic, getter=isVisible) _Bool visible;
 @end
 
-static BOOL didRemoveNotch;
-
 // To Do : Add blackView to the control center
 
 %hook _UIStatusBar
+
+%property BOOL didRemoveNotch;
 
 -(void)layoutSubviews {
 
     %orig;
 
     self.foregroundColor = [UIColor whiteColor];
+    // if (self.didRemoveNotch == nil) {
+    //     self.didRemoveNotch = NO;
+    // }
 
     // SBControlCenterController* ccController = (SBControlCenterController*)[%c(SBControlCenterController) sharedInstance];
 
@@ -47,7 +51,7 @@ static BOOL didRemoveNotch;
     // if (!ccController.visible && !didRemoveNotch) {
     //    [self removeNotch];
     // }
-    if(![[[UIApplication sharedApplication] keyWindow] isKindOfClass:%c(SBControlCenterWindow)]) {
+    if(![[[UIApplication sharedApplication] keyWindow] isKindOfClass:%c(SBControlCenterWindow)] && !self.didRemoveNotch) {
         [self removeNotch];
     }
 }
@@ -63,7 +67,7 @@ static BOOL didRemoveNotch;
     [self addSubview: notchHidingView];
     [self sendSubviewToBack: notchHidingView];
 
-    didRemoveNotch = YES;
+    self.didRemoveNotch = YES;
 
     //[notchHidingView release];
 }
