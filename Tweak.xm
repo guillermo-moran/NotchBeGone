@@ -30,7 +30,6 @@ static UIView* blackView(void) {
 @property(readonly, nonatomic, getter=isVisible) _Bool visible;
 @end
 
-<<<<<<< HEAD
 @interface LayoutContext : NSObject
 - (id)layoutState;
 @end
@@ -45,8 +44,6 @@ static UIView* blackView(void) {
 
 SBAppStatusBarSettingsAssertion *assertion;
 
-=======
->>>>>>> 5465e7cbebed11b6b042a5818e50543fa96239a5
 // To Do : Add blackView to the control center
 
 %hook _UIStatusBar
