@@ -1,9 +1,10 @@
 Package: com.crkatri.eggnotch
 Name: eggNotch
 Depends: mobilesubstrate
-Version: 0.0.2
+Version: 0.0.2-1
 Architecture: iphoneos-arm
 Description: Hide the notch on notched iPhones, iOS 11? - 13
 Maintainer: Egg aka CRKatri
 Author: Egg aka CRKatri
 Section: Tweaks
+Depiction: https://crkatri.github.io/depictions/com.crkatri.eggNotch
