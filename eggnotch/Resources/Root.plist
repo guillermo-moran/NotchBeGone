@@ -25,6 +25,26 @@
 			<false/>
 		</dict>
 		<dict>
+			<key>PostNotification</key>
+			<string>com.crkatri.eggNotch.prefsChanged</string> 
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>cellClass</key>
+			<string>CSColorDisplayCell</string>
+			<key>defaults</key>
+			<string>com.crkatri.eggNotch</string>
+			<key>defaultsPath</key>
+			<string>/Library/PreferenceBundles/eggNotch.bundle</string>
+			<key>key</key>
+			<string>eggNotchTextColor</string>
+			<key>label</key>
+			<string>Status Bar Text Color</string>
+            <key>fallback</key>
+            <string>FFFFFF</string>
+			<key>alpha</key>
+			<false/>
+		</dict>
+		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>default</key>

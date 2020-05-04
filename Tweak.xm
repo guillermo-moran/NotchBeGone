@@ -24,7 +24,7 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 
 }
 
-static UIView* blackView(void) {
+static UIView* coverView(void) {
 
     // I stole this idea from @LaughingQuoll
     // Thanks tho
@@ -33,15 +33,15 @@ static UIView* blackView(void) {
 
     CGRect frame = CGRectMake(-40.5, -6, screenBounds.size.width + 81, screenBounds.size.height+2000); //this is the border which will cover the notch
 
-    UIView *blackView = [[[UIView alloc] initWithFrame:frame] autorelease];
-    blackView.layer.borderColor = [UIColor cscp_colorFromHexString:StringForPreferenceKey(@"eggNotchColor")].CGColor;
-    blackView.layer.borderWidth = 40.0f;
+    UIView *coverView = [[[UIView alloc] initWithFrame:frame] autorelease];
+    coverView.layer.borderColor = [UIColor cscp_colorFromHexString:StringForPreferenceKey(@"eggNotchColor")].CGColor;
+    coverView.layer.borderWidth = 40.0f;
 
-    [blackView setClipsToBounds:YES];
-    [blackView.layer setMasksToBounds:YES];
-    blackView.layer.cornerRadius = 75;
+    [coverView setClipsToBounds:YES];
+    [coverView.layer setMasksToBounds:YES];
+    coverView.layer.cornerRadius = 75;
 
-    return blackView;
+    return coverView;
 }
 
 @interface _UIStatusBar : UIView
@@ -70,7 +70,7 @@ static UIView* blackView(void) {
 
 SBAppStatusBarSettingsAssertion *assertion;
 
-// To Do : Add blackView to the control center
+// To Do : Add coverView to the control center
 
 %hook _UIStatusBar
 
@@ -80,7 +80,7 @@ SBAppStatusBarSettingsAssertion *assertion;
 
     %orig;
 
-    self.foregroundColor = [UIColor whiteColor];
+    self.foregroundColor = [UIColor cscp_colorFromHexString:StringForPreferenceKey(@"eggNotchTextColor")];
 
     if(![[[UIApplication sharedApplication] keyWindow] isKindOfClass:%c(SBControlCenterWindow)] && !self.didRemoveNotch) {
         [self removeNotch];
@@ -98,7 +98,7 @@ SBAppStatusBarSettingsAssertion *assertion;
     
     [self setBackgroundColor:[UIColor blackColor]];
 
-    UIView* notchHidingView = blackView();
+    UIView* notchHidingView = coverView();
 
     [self addSubview: notchHidingView];
     [self sendSubviewToBack: notchHidingView];
