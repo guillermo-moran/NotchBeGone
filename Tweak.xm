@@ -1,5 +1,4 @@
 #include <CSColorPicker/CSColorPicker.h>
-#import <Cephei/HBPreferences.h>
 #define PLIST_PATH @"/User/Library/Preferences/com.crkatri.eggNotch.plist"
 
 inline NSString *StringForPreferenceKey(NSString *key) {
@@ -7,8 +6,23 @@ inline NSString *StringForPreferenceKey(NSString *key) {
     return prefs[key];
 }
 
-HBPreferences *preferences;
+@interface NSUserDefaults (SamplePrefs)
+-(id)objectForKey:(NSString *)key inDomain:(NSString *)domain;
+-(void)setObject:(id)value forKey:(NSString *)key inDomain:(NSString *)domain;
+@end
+
+static NSString *nsDomainString = @"com.crkatri.eggNotch";
+static NSString *nsNotificationString = @"com.crkatri.eggNotch.prefsChanged";
+
 static BOOL alwaysShow;
+
+static void notificationCallback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
+  
+    NSNumber *ealwaysShow = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"alwaysShow" inDomain:nsDomainString];
+
+    alwaysShow = (ealwaysShow)? [ealwaysShow boolValue]:NO;
+
+}
 
 static UIView* blackView(void) {
 
@@ -108,7 +122,11 @@ SBAppStatusBarSettingsAssertion *assertion;
 %end
 
 %ctor {
-  preferences = [[HBPreferences alloc] initWithIdentifier:@"com.crkatri.eggNotch"];
-
-  [preferences registerBool:&alwaysShow default:NO forKey:@"alwaysShow"];
+  notificationCallback(NULL, NULL, NULL, NULL, NULL);
+  CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
+    NULL,
+    notificationCallback,
+    (CFStringRef)nsNotificationString,
+    NULL,
+    CFNotificationSuspensionBehaviorCoalesce);
 }

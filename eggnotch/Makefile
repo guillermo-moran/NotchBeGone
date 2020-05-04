@@ -10,7 +10,6 @@ eggNotch_INSTALL_PATH = /Library/PreferenceBundles
 eggNotch_FRAMEWORKS = UIKit
 eggNotch_PRIVATE_FRAMEWORKS = Preferences
 eggNotch_CFLAGS = -fobjc-arc
-eggNotch_EXTRA_FRAMEWORKS = Cephei CepheiPrefs
 
 include $(THEOS_MAKE_PATH)/bundle.mk
 

@@ -8,7 +8,6 @@ TWEAK_NAME = eggNotch
 eggNotch_FILES = Tweak.xm
 eggNotch_FRAMEWORKS = UIKit CoreGraphics
 eggNotch_LDFLAGS += -lCSColorPicker
-eggNotch_EXTRA_FRAMEWORKS += Cephei
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 SUBPROJECTS += eggnotch
