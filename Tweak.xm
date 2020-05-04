@@ -1,3 +1,15 @@
+#include <CSColorPicker/CSColorPicker.h>
+#import <Cephei/HBPreferences.h>
+#define PLIST_PATH @"/User/Library/Preferences/com.crkatri.eggNotch.plist"
+
+inline NSString *StringForPreferenceKey(NSString *key) {
+    NSDictionary *prefs = [NSDictionary dictionaryWithContentsOfFile:PLIST_PATH] ? : [NSDictionary new];
+    return prefs[key];
+}
+
+HBPreferences *preferences;
+static BOOL alwaysShow;
+
 static UIView* blackView(void) {
 
     // I stole this idea from @LaughingQuoll
@@ -5,10 +17,10 @@ static UIView* blackView(void) {
 
     CGRect screenBounds = [UIScreen mainScreen].bounds;
 
-    CGRect frame = CGRectMake(-40.5, -5, screenBounds.size.width + 81, screenBounds.size.height+2000); //this is the border which will cover the notch
+    CGRect frame = CGRectMake(-40.5, -6, screenBounds.size.width + 81, screenBounds.size.height+2000); //this is the border which will cover the notch
 
     UIView *blackView = [[[UIView alloc] initWithFrame:frame] autorelease];
-    blackView.layer.borderColor = [UIColor blackColor].CGColor;
+    blackView.layer.borderColor = [UIColor cscp_colorFromHexString:StringForPreferenceKey(@"eggNotchColor")].CGColor;
     blackView.layer.borderWidth = 40.0f;
 
     [blackView setClipsToBounds:YES];
@@ -60,7 +72,7 @@ SBAppStatusBarSettingsAssertion *assertion;
         [self removeNotch];
     }
 
-	if (!assertion) {
+	if (!assertion && alwaysShow) {
 		assertion = [[NSClassFromString(@"SBAppStatusBarSettingsAssertion") alloc] initWithStatusBarHidden:NO atLevel:5 reason:@"eggNotch"];
 		[assertion acquire];
 	}
@@ -94,3 +106,9 @@ SBAppStatusBarSettingsAssertion *assertion;
     return frame;
 }
 %end
+
+%ctor {
+  preferences = [[HBPreferences alloc] initWithIdentifier:@"com.crkatri.eggNotch"];
+
+  [preferences registerBool:&alwaysShow default:NO forKey:@"alwaysShow"];
+}

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+		    <key>cellClass</key>
+		    <string>HBPackageTableCell</string>
+		    <key>label</key>
+		    <string>eggNotch</string>
+		    <key>packageIdentifier</key>
+		    <string>com.crkatri.eggNotch</string>
+		    <key>packageRepository</key>
+		    <string>https://crkatri.github.io/</string>
+		</dict>
+		<dict>
+			<key>PostNotification</key>
+			<string>com.crkatri.eggNotch.prefsChanged</string> 
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>cellClass</key>
+			<string>CSColorDisplayCell</string>
+			<key>defaults</key>
+			<string>com.crkatri.eggNotch</string>
+			<key>defaultsPath</key>
+			<string>/Library/PreferenceBundles/eggNotch.bundle</string>
+			<key>key</key>
+			<string>eggNotchColor</string>
+			<key>label</key>
+			<string>Notch Color</string>
+            <key>fallback</key>
+            <string>000000</string>
+			<key>alpha</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.crkatri.eggNotch</string>
+			<key>key</key>
+			<string>alwaysShow</string>
+			<key>label</key>
+			<string>Always Show (Glitchy))</string>
+			<key>PostNotification</key>
+			<string>com.crkatri.eggNotch/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Apply Changes</string>
+			<key>action</key>
+			<string>respring</string>
+		</dict>
+		<dict>
+    		<key>cellClass</key>
+		    <string>HBLinkTableCell</string>
+  		 	<key>label</key>
+ 		    <string>Source Code</string>
+ 		    <key>url</key>
+ 		    <string>https://github.com/CRKatri/NotchBeGone/tree/eggNotch</string>
+		</dict>
+		<dict>
+			<key>big</key>
+			<true/>
+			<key>showAvatar</key>
+			<true/>
+			<key>cellClass</key>
+			<string>HBTwitterCell</string>
+			<key>height</key>
+			<integer>56</integer>
+			<key>label</key>
+			<string>Egg aka CRKatri</string>
+			<key>user</key>
+			<string>katricameron</string>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>eggNotch</string>
+</dict>
+</plist>
