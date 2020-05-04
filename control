@@ -1,6 +1,6 @@
 Package: com.crkatri.eggnotch
 Name: eggNotch
-Depends: mobilesubstrate, ws.hbang.common 
+Depends: mobilesubstrate, ws.hbang.common, com.creaturesurvive.libcscolorpicker
 Version: 0.0.2
 Architecture: iphoneos-arm
 Description: Hide the notch on notched iPhones, iOS 11? - 13
