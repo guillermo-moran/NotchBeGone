@@ -15,7 +15,7 @@ static UIView* coverView(void) {
 
     CGRect screenBounds = [UIScreen mainScreen].bounds;
 
-    CGRect frame = CGRectMake(-40.5, -6.9, screenBounds.size.width + 81, screenBounds.size.height+2000); //this is the border which will cover the notch
+    CGRect frame = CGRectMake(-40.5, -7, screenBounds.size.width + 81, screenBounds.size.height+2000); //this is the border which will cover the notch
 
     UIView *coverView = [[[UIView alloc] initWithFrame:frame] autorelease];
     coverView.layer.borderColor = [UIColor cscp_colorFromHexString:StringForPreferenceKey(@"eggNotchColor")].CGColor;
