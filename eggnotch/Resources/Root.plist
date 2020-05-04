@@ -25,6 +25,20 @@
 			<false/>
 		</dict>
 		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.crkatri.eggNotch</string>
+			<key>key</key>
+			<string>staticColor</string>
+			<key>label</key>
+			<string>Use a static color for text</string>
+			<key>PostNotification</key>
+			<string>com.crkatri.eggNotch.prefsChanged</string>
+		</dict>
+		<dict>
 			<key>PostNotification</key>
 			<string>com.crkatri.eggNotch.prefsChanged</string> 
 			<key>cell</key>
@@ -55,6 +69,20 @@
 			<string>alwaysShow</string>
 			<key>label</key>
 			<string>Always Show (Glitchy)</string>
+			<key>PostNotification</key>
+			<string>com.crkatri.eggNotch.prefsChanged</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.crkatri.eggNotch</string>
+			<key>key</key>
+			<string>smallCorners</string>
+			<key>label</key>
+			<string>Have small corner radius</string>
 			<key>PostNotification</key>
 			<string>com.crkatri.eggNotch.prefsChanged</string>
 		</dict>

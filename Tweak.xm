@@ -6,23 +6,7 @@ inline NSString *StringForPreferenceKey(NSString *key) {
     return prefs[key];
 }
 
-@interface NSUserDefaults (SamplePrefs)
--(id)objectForKey:(NSString *)key inDomain:(NSString *)domain;
--(void)setObject:(id)value forKey:(NSString *)key inDomain:(NSString *)domain;
-@end
-
-static NSString *nsDomainString = @"com.crkatri.eggNotch";
-static NSString *nsNotificationString = @"com.crkatri.eggNotch.prefsChanged";
-
-static BOOL alwaysShow;
-
-static void notificationCallback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
-  
-    NSNumber *ealwaysShow = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"alwaysShow" inDomain:nsDomainString];
-
-    alwaysShow = (ealwaysShow)? [ealwaysShow boolValue]:NO;
-
-}
+NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.crkatri.eggNotch.plist"];
 
 static UIView* coverView(void) {
 
@@ -31,7 +15,7 @@ static UIView* coverView(void) {
 
     CGRect screenBounds = [UIScreen mainScreen].bounds;
 
-    CGRect frame = CGRectMake(-40.5, -6, screenBounds.size.width + 81, screenBounds.size.height+2000); //this is the border which will cover the notch
+    CGRect frame = CGRectMake(-40.5, -6.9, screenBounds.size.width + 81, screenBounds.size.height+2000); //this is the border which will cover the notch
 
     UIView *coverView = [[[UIView alloc] initWithFrame:frame] autorelease];
     coverView.layer.borderColor = [UIColor cscp_colorFromHexString:StringForPreferenceKey(@"eggNotchColor")].CGColor;
@@ -39,7 +23,11 @@ static UIView* coverView(void) {
 
     [coverView setClipsToBounds:YES];
     [coverView.layer setMasksToBounds:YES];
-    coverView.layer.cornerRadius = 75;
+    if([[dict objectForKey:@"smallCorners"] boolValue]) {
+        coverView.layer.cornerRadius = 50;
+    } else {
+        coverView.layer.cornerRadius = 75;        
+    }
 
     return coverView;
 }
@@ -79,14 +67,15 @@ SBAppStatusBarSettingsAssertion *assertion;
 -(void)layoutSubviews {
 
     %orig;
-
-    self.foregroundColor = [UIColor cscp_colorFromHexString:StringForPreferenceKey(@"eggNotchTextColor")];
+    if([[dict objectForKey:@"staticColor"] boolValue]) {
+        self.foregroundColor = [UIColor cscp_colorFromHexString:StringForPreferenceKey(@"eggNotchTextColor")];
+    }
 
     if(![[[UIApplication sharedApplication] keyWindow] isKindOfClass:%c(SBControlCenterWindow)] && !self.didRemoveNotch) {
         [self removeNotch];
     }
 
-	if (!assertion && alwaysShow) {
+	if (!assertion && [[dict objectForKey:@"alwaysShow"] boolValue]) {
 		assertion = [[NSClassFromString(@"SBAppStatusBarSettingsAssertion") alloc] initWithStatusBarHidden:NO atLevel:5 reason:@"eggNotch"];
 		[assertion acquire];
 	}
@@ -96,7 +85,7 @@ SBAppStatusBarSettingsAssertion *assertion;
 -(void)removeNotch {
 
     
-    [self setBackgroundColor:[UIColor blackColor]];
+    // [self setBackgroundColor:[UIColor blackColor]];
 
     UIView* notchHidingView = coverView();
 
@@ -121,12 +110,3 @@ SBAppStatusBarSettingsAssertion *assertion;
 }
 %end
 
-%ctor {
-  notificationCallback(NULL, NULL, NULL, NULL, NULL);
-  CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
-    NULL,
-    notificationCallback,
-    (CFStringRef)nsNotificationString,
-    NULL,
-    CFNotificationSuspensionBehaviorCoalesce);
-}
