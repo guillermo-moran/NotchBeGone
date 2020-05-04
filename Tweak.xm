@@ -67,7 +67,9 @@ SBAppStatusBarSettingsAssertion *assertion;
 -(void)layoutSubviews {
 
     %orig;
-    self.foregroundColor = [UIColor cscp_colorFromHexString:StringForPreferenceKey(@"eggNotchTextColor")];
+    if([[dict objectForKey:@"staticColor"] boolValue]) {
+        self.foregroundColor = [UIColor cscp_colorFromHexString:StringForPreferenceKey(@"eggNotchTextColor")];
+    }
 
     if(![[[UIApplication sharedApplication] keyWindow] isKindOfClass:%c(SBControlCenterWindow)] && !self.didRemoveNotch) {
         [self removeNotch];
