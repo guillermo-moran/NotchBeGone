@@ -67,7 +67,7 @@ SBAppStatusBarSettingsAssertion *assertion;
 -(void)layoutSubviews {
 
     %orig;
-    if([[dict objectForKey:@"staticColor"] boolValue]) {
+    if(![[dict objectForKey:@"staticColor"] boolValue]) {
         self.foregroundColor = [UIColor cscp_colorFromHexString:StringForPreferenceKey(@"eggNotchTextColor")];
     }
 
