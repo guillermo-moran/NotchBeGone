@@ -1,4 +1,3 @@
-
 static UIView* blackView(void) {
 
     // I stole this idea from @LaughingQuoll
@@ -6,7 +5,7 @@ static UIView* blackView(void) {
 
     CGRect screenBounds = [UIScreen mainScreen].bounds;
 
-    CGRect frame = CGRectMake(-40.5, -10, screenBounds.size.width + 81, screenBounds.size.height+200); //this is the border which will cover the notch
+    CGRect frame = CGRectMake(-40.5, -5, screenBounds.size.width + 81, screenBounds.size.height+2000); //this is the border which will cover the notch
 
     UIView *blackView = [[[UIView alloc] initWithFrame:frame] autorelease];
     blackView.layer.borderColor = [UIColor blackColor].CGColor;
@@ -21,6 +20,8 @@ static UIView* blackView(void) {
 
 @interface _UIStatusBar : UIView
 @property (nonatomic, retain) UIColor *foregroundColor;
+@property BOOL didRemoveNotch;
+-(void)removeNotch;
 @end
 
 @interface SBControlCenterController
@@ -29,11 +30,11 @@ static UIView* blackView(void) {
 @property(readonly, nonatomic, getter=isVisible) _Bool visible;
 @end
 
-static BOOL didRemoveNotch;
-
 // To Do : Add blackView to the control center
 
 %hook _UIStatusBar
+
+%property BOOL didRemoveNotch;
 
 -(void)layoutSubviews {
 
@@ -41,10 +42,7 @@ static BOOL didRemoveNotch;
 
     self.foregroundColor = [UIColor whiteColor];
 
-    SBControlCenterController* ccController = (SBControlCenterController*)[%c(SBControlCenterController) sharedInstance];
-
-    // Avoid adding the notch removing view to the control center
-    if (!ccController.visible && !didRemoveNotch) {
+    if(![[[UIApplication sharedApplication] keyWindow] isKindOfClass:%c(SBControlCenterWindow)] && !self.didRemoveNotch) {
         [self removeNotch];
     }
 }
@@ -60,7 +58,7 @@ static BOOL didRemoveNotch;
     [self addSubview: notchHidingView];
     [self sendSubviewToBack: notchHidingView];
 
-    didRemoveNotch = YES;
+    self.didRemoveNotch = YES;
 
     //[notchHidingView release];
 }
@@ -68,7 +66,7 @@ static BOOL didRemoveNotch;
 //Make the Statusbar slightly smaller
 
 - (void)setFrame:(CGRect)frame {
-    frame.size.height = 32;
+    frame.size.height = 34;
     %orig(frame);
 }
 - (CGRect)bounds {
